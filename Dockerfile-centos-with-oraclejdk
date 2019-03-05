@@ -1,0 +1,11 @@
+FROM centos:7
+
+RUN yum -y upgrade && \
+    yum -y install curl unzip findutils vim && \
+    curl -L -b "oraclelicense=a" https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.rpm -O && \
+    echo "c4ecb536002798fa12b644ae9bc70b43  jdk-8u201-linux-x64.rpm" >> MD5SUM8 && \
+    md5sum -c MD5SUM8 && \
+    rpm -Uvh jdk-8u201-linux-x64.rpm && \
+    yum -y clean all && \
+    rm -rf /var/cache/yum && \
+    rm -f jdk-8u201-linux-x64.rpm MD5SUM8

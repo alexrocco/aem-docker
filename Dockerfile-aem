@@ -1,0 +1,29 @@
+FROM centos-with-oraclejdk
+
+ARG AEM_RUNMODE=author
+ENV AEM_RUNMODE ${AEM_RUNMODE}
+
+ARG HTTP_PORT=4502
+ENV HTTP_PORT ${HTTP_PORT}
+
+ARG DEBUG_HTTP_PORT=5502
+ENV DEBUG_HTTP_PORT ${DEBUG_HTTP_PORT}
+
+ARG AEM_VERSION=6.4.0
+ENV AEM_VERSION ${AEM_VERSION}
+
+COPY files/cq-quickstart-${AEM_VERSION}.jar /crx/${AEM_RUNMODE}/
+COPY files/license.properties /crx/${AEM_RUNMODE}/
+COPY scripts/config.sh /tmp/
+COPY scripts/tools.sh /tmp/
+COPY scripts/start /tmp/
+COPY scripts/entrypoint.sh /
+
+RUN /tmp/config.sh && \
+    rm /tmp/*.sh && \
+    rm /crx/${AEM_RUNMODE}/cq-quickstart-${AEM_VERSION}.jar
+
+EXPOSE ${HTTP_PORT} ${DEBUG_HTTP_PORT}
+WORKDIR /crx/${AEM_RUNMODE}/
+
+ENTRYPOINT ["/entrypoint.sh"]

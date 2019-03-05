@@ -1,0 +1,32 @@
+ARG AEM_RUNMODE=author
+
+FROM ${AEM_RUNMODE}:6.4.3.0 as aem-image
+
+ARG HTTP_PORT=4502
+ARG DEBUG_HTTP_PORT=5502
+ARG OAK_VERSION=1.8.9
+
+ENV AEM_RUNMODE ${AEM_RUNMODE}
+ENV HTTP_PORT ${HTTP_PORT}
+
+COPY scripts/optimize.sh /tmp/
+COPY scripts/tools.sh /tmp/
+COPY files/etc-package.zip /tmp/
+
+ADD http://central.maven.org/maven2/org/apache/jackrabbit/oak-run/${OAK_VERSION}/oak-run-${OAK_VERSION}.jar /tmp/oak-run.jar
+
+RUN /tmp/optimize.sh && \
+  rm -rf /tmp/*
+
+FROM centos-with-oraclejdk
+
+ARG AEM_RUNMODE
+ENV AEM_RUNMODE ${AEM_RUNMODE}
+
+COPY --from=aem-image crx crx
+COPY --from=aem-image /entrypoint.sh /
+
+EXPOSE ${HTTP_PORT} ${DEBUG_HTTP_PORT}
+WORKDIR /crx/${AEM_RUNMODE}/
+
+ENTRYPOINT ["/entrypoint.sh"]
