@@ -31,6 +31,7 @@ run_garbage_collection
 stop_aem $AEM_RUNMODE
 wait_aem_stop $HTTP_PORT
 
+## https://helpx.adobe.com/br/experience-manager/6-4/sites/deploying/using/revision-cleanup.html#HowtoRunOfflineRevisionCleanup
 echo "Run OAK repository optmization"
 java -jar /tmp/oak-run.jar checkpoints /crx/$AEM_RUNMODE/crx-quickstart/repository/segmentstore
 java -jar /tmp/oak-run.jar checkpoints /crx/$AEM_RUNMODE/crx-quickstart/repository/segmentstore rm-unreferenced

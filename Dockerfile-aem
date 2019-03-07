@@ -1,4 +1,8 @@
 FROM centos-with-oraclejdk
+LABEL maintainer="alexxrocco@gmail.com"
+
+ARG AEM_VERSION=6.4.0
+ENV AEM_VERSION ${AEM_VERSION}
 
 ARG AEM_RUNMODE=author
 ENV AEM_RUNMODE ${AEM_RUNMODE}
@@ -8,9 +12,6 @@ ENV HTTP_PORT ${HTTP_PORT}
 
 ARG DEBUG_HTTP_PORT=5502
 ENV DEBUG_HTTP_PORT ${DEBUG_HTTP_PORT}
-
-ARG AEM_VERSION=6.4.0
-ENV AEM_VERSION ${AEM_VERSION}
 
 COPY files/cq-quickstart-${AEM_VERSION}.jar /crx/${AEM_RUNMODE}/
 COPY files/license.properties /crx/${AEM_RUNMODE}/
