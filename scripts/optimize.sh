@@ -35,7 +35,7 @@ wait_aem_stop $HTTP_PORT
 echo "Run OAK repository optmization"
 java -jar /tmp/oak-run.jar checkpoints /crx/$AEM_RUNMODE/crx-quickstart/repository/segmentstore
 java -jar /tmp/oak-run.jar checkpoints /crx/$AEM_RUNMODE/crx-quickstart/repository/segmentstore rm-unreferenced
-java -jar -Dsun.arch.data.model=32 /tmp/oak-runs.jar compact /crx/$AEM_RUNMODE/crx-quickstart/repository/segmentstore
+java -jar -Dsun.arch.data.model=32 /tmp/oak-run.jar compact /crx/$AEM_RUNMODE/crx-quickstart/repository/segmentstore
 
 echo "Remove log files"
 rm -rf /crx/$AEM_RUNMODE/crx-quickstart/logs/*
