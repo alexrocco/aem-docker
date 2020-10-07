@@ -73,7 +73,7 @@ Build arguments:
 - AEM_RUNMODE: author or publish (default: author)
 - HTTP_PORT: port to be exposed by AEM and docker (default: 4502)
 - DEBUG_HTTP_PORT: debug port to be exposed by AEM and docker (default: 5502)
-- OAK_VERSION: The version of OAK run jar, used on [offline revision clean up](https://helpx.adobe.com/br/experience-manager/6-4/sites/deploying/using/revision-cleanup.html#HowtoRunOfflineRevisionCleanup). This version has to be the same used in the serice pack. You can get the right version on service pack release page or go to system/console/bundle a and search for oak (default: 1.8.9)
+- OAK_VERSION: The version of OAK run jar, used on [offline revision clean up](https://helpx.adobe.com/br/experience-manager/6-4/sites/deploying/using/revision-cleanup.html#HowtoRunOfflineRevisionCleanup). This version has to be the same used in the service pack. You can get the right version on service pack release page or go to system/console/bundle a and search for Oak Core (default: 1.8.9)
 
 author:
 ```
